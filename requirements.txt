@@ -1,5 +1,7 @@
 Flask
-numpy
+Flask-CORS
 scikit-learn
 pandas
+numpy
 gunicorn
+pickle5
