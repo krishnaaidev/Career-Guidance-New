@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Guidance</title>
+    
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Additional fixes for particle background */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        /* Ensure content is above particles */
+        .navbar, .hero, .input-section, .features, .developers, .contact, .footer {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Fix for floating cards */
+        .floating-card, .floating-card-small {
+            will-change: transform;
+        }
+        
+        /* Ensure tooltips work properly */
+        .tooltip {
+            position: relative;
+            cursor: help;
+        }
+        
+        .tooltip:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-blue);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            z-index: 1000;
+            margin-bottom: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" data-aos="fade-right">
+                <i class="fas fa-robot"></i>
+                <span class="gradient-text">Career<span class="light"> Guidance</span></span>
+            </div>
+            
+            <div class="nav-links" data-aos="fade-left">
+                <a href="#home" class="active"><i class="fas fa-home"></i> Home</a>
+                <a href="#features"><i class="fas fa-cube"></i> Features</a>
+                <a href="#developers"><i class="fas fa-code"></i> Developers</a>
+                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+                <div class="hero-badge">
+                    <i class="fas fa-microchip"></i> AI-Powered Career Guidance
+                </div>
+                <h1 class="gradient-text">Discover Your <br>Perfect <span class="typing"></span></h1>
+                <p class="hero-subtitle">Enter your skills and let our advanced AI model analyze career paths to find your ideal match with precision accuracy.</p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item" data-aos="zoom-in" data-aos-delay="200">
+                        <span class="stat-number" id="totalJobs">50+</span>
+                        <span class="stat-label">Job Roles</span>
+                    </div>
+                    <div class="stat-item" data-aos="zoom-in" data-aos-delay="400">
+                        <span class="stat-number" id="totalSkills">500+</span>
+                        <span class="stat-label">Skills Mapped</span>
+                    </div>
+                    <div class="stat-item" data-aos="zoom-in" data-aos-delay="600">
+                        <span class="stat-number">98%</span>
+                        <span class="stat-label">Accuracy</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-image" data-aos="fade-left" data-aos-duration="1000">
+                <div class="floating-card">
+                    <i class="fas fa-chart-network"></i>
+                </div>
+                <div class="floating-card-small">
+                    <i class="fas fa-brain"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+        </div>
+    </section>
+
+    <!-- Main Input Section -->
+    <section class="input-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title gradient-text">What Skills Do You Have?</h2>
+                <p class="section-subtitle">Enter your skills separated by commas. Include both technical and soft skills for the best recommendations.</p>
+            </div>
+
+            <div class="input-card glass-effect" data-aos="flip-up" data-aos-duration="800">
+                <div class="skill-input-container">
+                    <div class="input-wrapper">
+                        <i class="fas fa-pencil-alt input-icon"></i>
+                        <textarea 
+                            id="skillsInput" 
+                            placeholder="e.g., python, machine learning, sql, communication, java, react, teamwork"
+                            rows="4"
+                        ></textarea>
+                    </div>
+                    
+                    <div class="suggested-skills">
+                        <p><i class="fas fa-bolt"></i> Quick Add Skills:</p>
+                        <div class="skill-tags" id="skillTags"></div>
+                    </div>
+                    
+                    <div class="input-options">
+                        <div class="top-n-selector glass-effect">
+                            <label for="topN">
+                                <i class="fas fa-sliders-h"></i> Recommendations:
+                            </label>
+                            <select id="topN" class="glass-select">
+                                <option value="3">3</option>
+                                <option value="5" selected>5</option>
+                                <option value="7">7</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="0">All</option>
+                            </select>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button id="analyzeBtn" class="primary-btn" onclick="analyzeSkills()">
+                                <i class="fas fa-search"></i>
+                                <span>Analyze Skills</span>
+                                <div class="btn-glow"></div>
+                            </button>
+                            
+                            <button id="clearBtn" class="secondary-btn" onclick="resetSearch()">
+                                <i class="fas fa-redo-alt"></i>
+                                <span>Clear</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loading Section -->
+    <section id="loading" class="loading-section" style="display: none;">
+        <div class="loading-container glass-effect">
+            <div class="spinner"></div>
+            <div class="loading-text">
+                <h3>Analyzing Your Skills</h3>
+                <p class="typing-loading"></p>
+            </div>
+            <div class="loading-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results" class="results-section" style="display: none;">
+        <div class="container">
+            <div class="results-header" data-aos="fade-down">
+                <h2 class="section-title gradient-text">Your Career Matches</h2>
+                <div class="results-summary" id="resultsSummary"></div>
+            </div>
+
+            <div class="results-controls" id="resultsControls"></div>
+
+            <div class="recommendations-grid" id="recommendationsGrid"></div>
+
+            <div class="results-footer">
+                <div class="export-options">
+                    <button class="export-btn" onclick="exportResults('csv')">
+                        <i class="fas fa-file-csv"></i> Export CSV
+                    </button>
+                    <button class="export-btn" onclick="exportResults('json')">
+                        <i class="fas fa-file-code"></i> Export JSON
+                    </button>
+                    <button class="export-btn" onclick="exportResults('print')">
+                        <i class="fas fa-print"></i> Print
+                    </button>
+                </div>
+                
+                <button class="new-search-btn" onclick="resetSearch()">
+                    <i class="fas fa-arrow-left"></i> New Search
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title gradient-text">Why Choose Career Guidance?</h2>
+                <p class="section-subtitle">Powered by advanced machine learning and comprehensive industry data</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card glass-effect" data-aos="flip-left" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI-Powered Matching</h3>
+                    <p>Our deep learning model analyzes skill patterns across 50+ job roles with 98% accuracy</p>
+                    <div class="feature-stats">
+                        <span>98% Accuracy</span>
+                        <span>50+ Jobs</span>
+                    </div>
+                </div>
+
+                <div class="feature-card glass-effect" data-aos="flip-left" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>Real-Time Analysis</h3>
+                    <p>Get instant recommendations as you type with our optimized prediction engine</p>
+                    <div class="feature-stats">
+                        <span>&lt; 1 sec</span>
+                        <span>Real-time</span>
+                    </div>
+                </div>
+
+                <div class="feature-card glass-effect" data-aos="flip-left" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Skill Gap Analysis</h3>
+                    <p>Identify exactly what skills you need to develop for your dream career</p>
+                    <div class="feature-stats">
+                        <span>500+ Skills</span>
+                        <span>Detailed</span>
+                    </div>
+                </div>
+
+                <div class="feature-card glass-effect" data-aos="flip-left" data-aos-delay="400">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Responsive Design</h3>
+                    <p>Access from any device with our fully responsive, mobile-friendly interface</p>
+                    <div class="feature-stats">
+                        <span>Mobile First</span>
+                        <span>All Devices</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Developers Section -->
+    <section id="developers" class="developers">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title gradient-text">Meet The Developers</h2>
+                <p class="section-subtitle">Created with passion by talented engineers</p>
+            </div>
+
+            <div class="developers-grid">
+                <!-- Developer 1: Suman Krishna -->
+                <div class="developer-card glass-effect" data-aos="zoom-in-up" data-aos-delay="200">
+                    <div class="developer-image">
+                        <div class="image-wrapper">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="developer-badge">
+                            <i class="fas fa-crown"></i> Lead Developer
+                        </div>
+                    </div>
+                    
+                    <div class="developer-info">
+                        <h3>Suman Krishna</h3>
+                        <p class="developer-role">AI/ML Engineer & Full Stack Developer</p>
+                        
+                        <div class="developer-institution">
+                            <i class="fas fa-university"></i>
+                            <span>CT Institute of Engineering, Management and Technology</span>
+                        </div>
+                        
+                        <div class="developer-contact">
+                            <p><i class="fas fa-envelope"></i> suman.2301275@stu.ctgroup.in</p>
+                            <p><i class="fas fa-phone"></i> +91 98779 38126</p>
+                        </div>
+                        
+                        <div class="developer-skills">
+                            <span>Python</span>
+                            <span>Machine Learning</span>
+                            <span>React</span>
+                            <span>Flask</span>
+                            <span>TensorFlow</span>
+                        </div>
+                        
+                        <div class="developer-links">
+                            <a href="https://github.com/krishnaaidev" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/suman-krishna-7a17a6275/" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="mailto:krishna.techx.31@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                        </div>
+                        
+                        <div class="developer-contributions">
+                            <h4><i class="fas fa-code-branch"></i> Contributions:</h4>
+                            <ul>
+                                <li>Machine Learning Model Development</li>
+                                <li>Backend API Architecture</li>
+                                <li>AI Algorithm Optimization</li>
+                                <li>Database Design</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Developer 2: Shivam Kumar Chaubey -->
+                <div class="developer-card glass-effect" data-aos="zoom-in-up" data-aos-delay="400">
+                    <div class="developer-image">
+                        <div class="image-wrapper">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="developer-badge">
+                            <i class="fas fa-code"></i> Frontend Specialist
+                        </div>
+                    </div>
+                    
+                    <div class="developer-info">
+                        <h3>Shivam Kumar Chaubey</h3>
+                        <p class="developer-role">Frontend Developer & UI/UX Designer</p>
+                        
+                        <div class="developer-institution">
+                            <i class="fas fa-university"></i>
+                            <span>CT Institute of Engineering, Management and Technology</span>
+                        </div>
+                        
+                        <div class="developer-contact">
+                            <p><i class="fas fa-envelope"></i> shivam.2301267@stu.ctgroup.in</p>
+                            <p><i class="fas fa-phone"></i> +91 79911 01684</p>
+                        </div>
+                        
+                        <div class="developer-skills">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                            <span>React</span>
+                            <span>UI/UX</span>
+                        </div>
+                        
+                        <div class="developer-links">
+                            <a href="https://github.com/shivam-chaubey-065" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/shivam-kumar-chaubey-3b794825a/" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="mailto:shivamchaubey065@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                        </div>
+                        
+                        <div class="developer-contributions">
+                            <h4><i class="fas fa-paint-brush"></i> Contributions:</h4>
+                            <ul>
+                                <li>Frontend Architecture & Design</li>
+                                <li>Interactive UI Components</li>
+                                <li>Dark Theme Implementation</li>
+                                <li>Responsive Layout Design</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Institution Info -->
+            <div class="institution-info glass-effect" data-aos="fade-up">
+                <i class="fas fa-building"></i>
+                <div class="institution-text">
+                    <h3>CT Institute of Engineering, Management and Technology</h3>
+                    <p>CT Group of Institutions | Excellence in Technical Education Since 1997</p>
+                </div>
+                <div class="institution-badge">
+                    <span>NAAC A</span>
+                    <span>AICTE Approved</span>
+                    <span>Est. 1997</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title gradient-text">Get In Touch</h2>
+                <p class="section-subtitle">Have questions? We'd love to hear from you</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info glass-effect" data-aos="fade-right">
+                    <h3>Contact Information</h3>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Address</h4>
+                            <p>CT Institute of Engineering, Management and Technology<br>Shahpur, Jalandhar, Punjab 144020</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>suman.2301275@stu.ctgroup.in<br>shivam.2301267@stu.ctgroup.in</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+91 98779 38126<br>+91 79911 01684</p>
+                        </div>
+                    </div>
+                    
+                    <div class="social-media">
+                        <a href="https://github.com/krishnaaidev" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/suman-krishna-7a17a6275/" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/shivam-chaubey-065" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/shivam-kumar-chaubey-3b794825a/" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="contact-form glass-effect" data-aos="fade-left">
+                    <form id="contactForm" action="https://formspree.io/f/mpqydyjp" method="POST">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                            <i class="fas fa-user"></i>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" id="subject" name="subject" placeholder="Subject">
+                            <i class="fas fa-tag"></i>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+                            <i class="fas fa-comment"></i>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                            <div class="btn-glow"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-robot"></i>
+                        <span class="gradient-text">Pixel2Predict</span>
+                    </div>
+                    <p>Intelligent career recommendations powered by machine learning and industry expertise.</p>
+                    <div class="footer-stats">
+                        <div class="footer-stat">
+                            <span class="stat-value">50+</span>
+                            <span class="stat-label">Job Roles</span>
+                        </div>
+                        <div class="footer-stat">
+                            <span class="stat-value">500+</span>
+                            <span class="stat-label">Skills</span>
+                        </div>
+                        <div class="footer-stat">
+                            <span class="stat-value">98%</span>
+                            <span class="stat-label">Accuracy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#features"><i class="fas fa-chevron-right"></i> Features</a></li>
+                        <li><a href="#developers"><i class="fas fa-chevron-right"></i> Developers</a></li>
+                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Developers</h4>
+                    <ul>
+                        <li><a href="https://github.com/krishnaaidev" target="_blank"><i class="fab fa-github"></i> Suman Krishna</a></li>
+                        <li><a href="https://www.linkedin.com/in/suman-krishna-7a17a6275/" target="_blank"><i class="fab fa-linkedin"></i> Suman Krishna</a></li>
+                        <li><a href="https://github.com/shivam-chaubey-065" target="_blank"><i class="fab fa-github"></i> Shivam Chaubey</a></li>
+                        <li><a href="https://www.linkedin.com/in/shivam-kumar-chaubey-3b794825a/" target="_blank"><i class="fab fa-linkedin"></i> Shivam Chaubey</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe for career tips and updates</p>
+                    <form class="newsletter-form" action="https://formspree.io/f/mbdzozzz" method="POST">
+                        <input type="email" name="email" placeholder="Your email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2026 Career Guidance. All rights reserved.</p>
+                </div>
+                <div class="developer-credit">
+                    <p>Developed with <i class="fas fa-heart" style="color: #ff4757;"></i> by 
+                        <span class="gradient-text">Suman Krishna</span> & 
+                        <span class="gradient-text">Shivam Kumar Chaubey</span>
+                    </p>
+                </div>
+                
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts - Load in correct order -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="script.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Initialize Typed.js
+        var typed = new Typed('.typing', {
+            strings: ['Career Path', 'Job Role', 'Future', 'Dream Job'],
+            typeSpeed: 100,
+            backSpeed: 60,
+            loop: true
+        });
+
+        // Initialize Particles with error handling
+        if (typeof particlesJS !== 'undefined') {
+            try {
+                particlesJS.load('particles-js', 'particles.json', function() {
+                    console.log('Particles loaded');
+                });
+            } catch (error) {
+                console.log('Particles could not be loaded, using fallback');
+                // Fallback particles configuration
+                particlesJS('particles-js', {
+                    particles: {
+                        number: { value: 80, density: { enable: true, value_area: 800 } },
+                        color: { value: '#2a7de1' },
+                        shape: { type: 'circle' },
+                        opacity: { value: 0.3, random: true },
+                        size: { value: 3, random: true },
+                        line_linked: { enable: true, distance: 150, color: '#2a7de1', opacity: 0.2 },
+                        move: { enable: true, speed: 2 }
+                    }
+                });
+            }
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            const backToTop = document.getElementById('backToTop');
+            
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        // Mobile nav toggle
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('show');
+            this.classList.toggle('active');
+        });
+
+        // Close mobile nav when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('.nav-links').classList.remove('show');
+                document.getElementById('navToggle').classList.remove('active');
+            });
+        });
+
+        // Form submission handlers
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = this;
+            const formData = new FormData(form);
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    showNotification('Message sent successfully!', 'success');
+                    form.reset();
+                } else {
+                    showNotification('Error sending message. Please try again.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('Error sending message. Please try again.', 'error');
+            });
+        });
+
+        // Newsletter form handler
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = this;
+            const formData = new FormData(form);
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    showNotification('Subscribed successfully!', 'success');
+                    form.reset();
+                } else {
+                    showNotification('Error subscribing. Please try again.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('Error subscribing. Please try again.', 'error');
+            });
+        });
+
+        // Show notification function (fallback in case script.js hasn't loaded yet)
+        window.showNotification = window.showNotification || function(message, type) {
+            console.log(`${type}: ${message}`);
+            alert(message); // Fallback alert if notification system fails
+        };
+    </script>
+</body>
+</html>
