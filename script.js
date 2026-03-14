@@ -11,365 +11,323 @@ let itemsPerPage = 5;
 let viewMode = 'grid';
 let totalPages = 1;
 
-// Comprehensive Job Skills Database
+// ==================== JOB DATABASE ====================
+// Constructed from the provided CSV data
 const jobDatabase = [
     {
-        job_role: "Data Scientist",
-        required_skills: ["python", "r", "sql", "machine learning", "statistics", "data visualization", "pandas", "numpy", "scikit-learn", "deep learning", "big data", "hadoop", "spark", "data mining", "communication"],
-        confidence: 98
-    },
-    {
-        job_role: "Machine Learning Engineer",
-        required_skills: ["python", "tensorflow", "pytorch", "machine learning", "deep learning", "nlp", "computer vision", "data structures", "algorithms", "statistics", "probability", "linear algebra", "calculus", "model deployment", "apis"],
-        confidence: 97
-    },
-    {
-        job_role: "Software Developer",
-        required_skills: ["java", "python", "c++", "javascript", "data structures", "algorithms", "git", "sql", "problem solving", "oop", "debugging", "unit testing", "agile", "communication", "teamwork"],
-        confidence: 95
-    },
-    {
-        job_role: "Data Analyst",
-        required_skills: ["sql", "excel", "python", "r", "tableau", "power bi", "data visualization", "statistics", "data cleaning", "data wrangling", "communication", "critical thinking", "reporting", "presentation"],
-        confidence: 96
-    },
-    {
         job_role: "AI Engineer",
-        required_skills: ["python", "tensorflow", "pytorch", "keras", "machine learning", "deep learning", "neural networks", "nlp", "computer vision", "reinforcement learning", "data structures", "algorithms", "probability"],
-        confidence: 97
+        required_skills: ["Python", "TensorFlow", "PyTorch", "Machine Learning", "Deep Learning", "NLP", "Computer Vision", "APIs", "Deployment", "Data Preprocessing", "Git", "Linux", "Optimization", "Critical Thinking", "Communication", "Problem Solving", "Collaboration", "Continuous Learning", "Analytical Thinking", "Creativity", "Adaptability"]
+    },
+    {
+        job_role: "Android Developer",
+        required_skills: ["Java", "Kotlin", "Android SDK", "XML", "REST APIs", "SQLite", "Firebase", "Git", "MVVM", "Debugging", "User Empathy", "Adaptability", "Attention to Detail", "Team Collaboration", "Time Management", "Problem Solving", "Communication", "Openness to Feedback"]
+    },
+    {
+        job_role: "Application Developer",
+        required_skills: ["Java", "Kotlin", "Swift", "C#", "OOP", "MVC", "REST APIs", "SQLite", "Git", "UI Frameworks", "Debugging", "Unit Testing", "SDKs", "Deployment", "Version Control", "Requirement Analysis", "Problem Solving", "Time Management", "Stakeholder Management", "Documentation", "Team Collaboration", "Adaptability", "Critical Thinking"]
+    },
+    {
+        job_role: "AR/VR Developer",
+        required_skills: ["C#", "Unity", "Unreal Engine", "3D Math", "Computer Graphics", "OpenXR", "Shader Programming", "Creativity", "User Testing", "Storytelling", "Patience", "Collaboration", "Adaptability", "Spatial Reasoning", "Communication"]
+    },
+    {
+        job_role: "Automation Test Engineer",
+        required_skills: ["Java", "Python", "Selenium", "TestNG", "PyTest", "API Testing", "CI/CD", "Analytical Thinking", "Attention to Detail", "Process Orientation", "Communication", "Persistence", "Problem Solving", "Collaboration", "Time Management"]
     },
     {
         job_role: "Backend Developer",
-        required_skills: ["python", "java", "node.js", "sql", "mongodb", "apis", "rest", "graphql", "git", "docker", "linux", "data structures", "algorithms", "system design", "debugging"],
-        confidence: 94
+        required_skills: ["Java", "Python", "Node.js", "SQL", "MongoDB", "REST APIs", "Authentication", "DSA", "OOP", "Git", "Linux", "Microservices", "Docker", "API Security", "Debugging", "Systems Thinking", "Collaboration", "Documentation", "Problem Solving", "Analytical Thinking", "Communication", "Time Management", "Attention to Detail"]
     },
     {
-        job_role: "Frontend Developer",
-        required_skills: ["html", "css", "javascript", "react", "angular", "vue", "typescript", "responsive design", "git", "webpack", "ui/ux", "cross-browser compatibility", "debugging", "teamwork"],
-        confidence: 93
-    },
-    {
-        job_role: "Full Stack Developer",
-        required_skills: ["html", "css", "javascript", "react", "node.js", "python", "sql", "mongodb", "git", "rest apis", "docker", "aws", "data structures", "algorithms", "problem solving"],
-        confidence: 94
-    },
-    {
-        job_role: "DevOps Engineer",
-        required_skills: ["linux", "python", "bash", "docker", "kubernetes", "jenkins", "git", "aws", "azure", "ci/cd", "terraform", "ansible", "monitoring", "networking", "security"],
-        confidence: 92
-    },
-    {
-        job_role: "Cloud Architect",
-        required_skills: ["aws", "azure", "gcp", "docker", "kubernetes", "terraform", "networking", "security", "python", "linux", "system design", "microservices", "devops", "cost optimization"],
-        confidence: 91
-    },
-    {
-        job_role: "Cybersecurity Analyst",
-        required_skills: ["networking", "linux", "python", "security", "firewalls", "ids/ips", "vulnerability assessment", "penetration testing", "incident response", "risk management", "cryptography", "siem"],
-        confidence: 90
-    },
-    {
-        job_role: "Mobile Developer",
-        required_skills: ["java", "kotlin", "swift", "android", "ios", "flutter", "react native", "mobile ui", "git", "rest apis", "firebase", "sqlite", "problem solving", "debugging"],
-        confidence: 89
-    },
-    {
-        job_role: "Database Administrator",
-        required_skills: ["sql", "mysql", "postgresql", "mongodb", "oracle", "database design", "performance tuning", "backup recovery", "security", "linux", "python", "automation", "monitoring"],
-        confidence: 88
-    },
-    {
-        job_role: "Network Engineer",
-        required_skills: ["networking", "tcp/ip", "routing", "switching", "firewalls", "vpn", "linux", "python", "cisco", "network security", "troubleshooting", "monitoring", "documentation"],
-        confidence: 87
-    },
-    {
-        job_role: "QA Tester",
-        required_skills: ["manual testing", "automation testing", "selenium", "java", "python", "test cases", "bug tracking", "jira", "sql", "agile", "attention to detail", "communication", "critical thinking"],
-        confidence: 86
+        job_role: "Blockchain Developer",
+        required_skills: ["Solidity", "JavaScript", "Blockchain", "Web3.js", "Ethereum", "Smart Contracts", "Cryptography", "Testing", "Git", "Integrity", "Transparency", "Research Orientation", "Security Mindset", "Communication", "Adaptability", "Critical Thinking", "Collaboration"]
     },
     {
         job_role: "Business Analyst",
-        required_skills: ["sql", "excel", "data analysis", "requirements gathering", "documentation", "communication", "stakeholder management", "critical thinking", "problem solving", "agile", "visio", "presentation"],
-        confidence: 85
+        required_skills: ["SQL", "Excel", "Power BI", "Data Analysis", "Python", "Communication", "Stakeholder Management", "Critical Thinking", "Negotiation", "Requirement Elicitation", "Documentation", "Facilitation", "Problem Solving"]
     },
     {
-        job_role: "Project Manager",
-        required_skills: ["project management", "agile", "scrum", "leadership", "communication", "risk management", "budgeting", "scheduling", "team management", "stakeholder management", "jira", "microsoft project"],
-        confidence: 84
+        job_role: "Business Intelligence Analyst",
+        required_skills: ["SQL", "Power BI", "Tableau", "Data Warehousing", "ETL", "Excel", "Python", "Data Modeling", "Reporting", "KPI Analysis", "Dashboards", "OLAP", "Business Metrics", "Data Storytelling", "Visualization", "Business Acumen", "Communication", "Critical Thinking", "Attention to Detail", "Collaboration", "Curiosity"]
+    },
+    {
+        job_role: "Cloud Architect",
+        required_skills: ["Cloud Platforms", "System Design", "Python", "Terraform", "Networking", "Security Architecture", "Kubernetes", "Docker", "CI/CD", "Scalability", "Strategic Thinking", "Communication", "Cost Management", "Leadership", "Negotiation", "Systems Design", "Collaboration", "Adaptability"]
+    },
+    {
+        job_role: "Cloud Engineer",
+        required_skills: ["Python", "AWS", "Azure", "GCP", "Linux", "Docker", "Kubernetes", "Terraform", "CI/CD", "Networking", "Monitoring", "Troubleshooting", "Collaboration", "Automation Mindset", "Documentation", "Adaptability", "Communication", "Problem Solving", "Continuous Learning"]
+    },
+    {
+        job_role: "Computer Vision Engineer",
+        required_skills: ["Python", "OpenCV", "CNN", "Image Processing", "TensorFlow", "PyTorch", "Data Augmentation", "Object Detection", "Image Classification", "Feature Extraction", "APIs", "Experimental Mindset", "Communication", "Critical Thinking", "Persistence", "Collaboration", "Creativity", "Patience", "Analytical Thinking"]
+    },
+    {
+        job_role: "Cross-Platform App Developer",
+        required_skills: ["Dart", "Flutter", "JavaScript", "React Native", "REST APIs", "State Management", "Firebase", "Git", "UI Design", "Adaptability", "Efficiency", "Problem Solving", "Attention to Detail", "Communication", "Time Management", "User Empathy", "Collaboration"]
+    },
+    {
+        job_role: "Cybersecurity Engineer",
+        required_skills: ["Python", "C", "Networking", "Linux", "Cryptography", "Malware Analysis", "Security Tools", "Scripting", "Firewalls", "IDS/IPS", "Vulnerability Analysis", "Incident Response", "Vigilance", "Communication", "Ethical Mindset", "Attention to Detail", "Problem Solving", "Adaptability", "Collaboration", "Analytical Thinking"]
+    },
+    {
+        job_role: "Data Analyst",
+        required_skills: ["SQL", "Python", "Excel", "Pandas", "NumPy", "Data Cleaning", "Visualization", "Power BI", "Tableau", "Statistics", "Reporting", "Dashboards", "ETL", "Documentation", "Curiosity", "Communication", "Storytelling", "Attention to Detail", "Critical Thinking", "Collaboration", "Problem Solving", "Time Management"]
+    },
+    {
+        job_role: "Data Scientist",
+        required_skills: ["Python", "R", "SQL", "Pandas", "NumPy", "Data Cleaning", "Visualization", "Statistics", "Machine Learning", "Scikit-learn", "Jupyter", "Feature Engineering", "APIs", "Model Evaluation", "Curiosity", "Storytelling", "Business Acumen", "Critical Thinking", "Collaboration", "Communication", "Experimental Mindset", "Adaptability"]
+    },
+    {
+        job_role: "Deep Learning Engineer",
+        required_skills: ["Python", "TensorFlow", "PyTorch", "Neural Networks", "CNN", "RNN", "Transformers", "CUDA", "GPU Computing", "Data Augmentation", "Model Optimization", "APIs", "Linux", "Curiosity", "Humility", "Technical Communication", "Rigor", "Persistence", "Collaboration", "Critical Thinking", "Continuous Learning"]
+    },
+    {
+        job_role: "DeFi Engineer",
+        required_skills: ["Solidity", "Ethereum", "Web3.js", "Cryptography", "Smart Contract Security", "Financial Protocols", "Security Awareness", "Transparency", "Innovation", "Critical Thinking", "Communication", "Adaptability", "Collaboration", "Research Orientation"]
+    },
+    {
+        job_role: "DevOps Engineer",
+        required_skills: ["Linux", "Python", "Bash", "Docker", "Kubernetes", "CI/CD", "Terraform", "Git", "Cloud Platforms", "Monitoring", "Collaboration", "Automation Mindset", "Calm Under Pressure", "Communication", "Problem Solving", "Adaptability", "Systems Thinking", "Continuous Learning"]
+    },
+    {
+        job_role: "Digital Forensics Analyst",
+        required_skills: ["Python", "Linux", "File Systems", "Memory Analysis", "Disk Forensics", "Malware Analysis", "Networking", "Cryptography", "Log Analysis", "Integrity", "Attention to Detail", "Methodical Thinking", "Communication", "Patience", "Objectivity", "Critical Thinking", "Documentation"]
+    },
+    {
+        job_role: "Embedded Software Engineer",
+        required_skills: ["C", "C++", "Embedded C", "Microcontrollers", "RTOS", "ARM", "UART", "SPI", "I2C", "Device Drivers", "Firmware", "Debugging", "Embedded Linux", "Memory Optimization", "Sensors", "Patience", "Precision", "Cross-functional Collaboration", "Logic", "Problem Solving", "Attention to Detail", "Communication", "Adaptability"]
+    },
+    {
+        job_role: "Ethical Hacker",
+        required_skills: ["Python", "Bash", "Networking", "Linux", "Penetration Testing", "Web Security", "SQL Injection", "Scripting", "Exploit Development", "Cryptography", "OSINT", "Curiosity", "Integrity", "Persistence", "Communication", "Creative Thinking", "Adaptability", "Attention to Detail", "Collaboration"]
+    },
+    {
+        job_role: "Frontend Developer",
+        required_skills: ["HTML", "CSS", "JavaScript", "React", "TypeScript", "Responsive Design", "Tailwind", "DOM", "REST APIs", "Git", "Web Performance", "Accessibility", "DevTools", "State Management", "Empathy", "Communication", "Creativity", "Openness to Feedback", "Attention to Detail", "Collaboration", "Problem Solving", "Adaptability"]
+    },
+    {
+        job_role: "Full Stack Developer",
+        required_skills: ["HTML", "CSS", "JavaScript", "React", "Node.js", "Express", "REST APIs", "MongoDB", "SQL", "Git", "JWT", "Docker", "Deployment", "API Integration", "Debugging", "Versatility", "Big Picture Thinking", "Adaptability", "Problem Solving", "Communication", "Time Management", "Collaboration", "Continuous Learning"]
+    },
+    {
+        job_role: "Game Developer",
+        required_skills: ["C++", "C#", "Unity", "Unreal Engine", "Game Physics", "Rendering", "Mathematics", "Animation", "Game AI", "Storytelling", "Resilience", "Creativity", "Collaboration", "Patience", "Adaptability", "User Empathy", "Openness to Feedback"]
+    },
+    {
+        job_role: "Information Security Analyst",
+        required_skills: ["Python", "SQL", "Linux", "Networking", "SIEM", "Vulnerability Management", "Risk Assessment", "Incident Response", "Security Monitoring", "Log Analysis", "Vigilance", "Communication", "Ethical Mindset", "Adaptability", "Problem Solving", "Collaboration", "Attention to Detail", "Analytical Thinking"]
+    },
+    {
+        job_role: "Infrastructure Engineer",
+        required_skills: ["Linux", "Networking", "Cloud Platforms", "Python", "Bash", "Docker", "Kubernetes", "Terraform", "Monitoring", "Reliability", "Troubleshooting", "Communication", "Collaboration", "Documentation", "Adaptability", "Problem Solving", "Systems Thinking"]
+    },
+    {
+        job_role: "iOS Developer",
+        required_skills: ["Swift", "Objective-C", "iOS SDK", "Xcode", "REST APIs", "Core Data", "Git", "MVC", "Debugging", "Design Sensibility", "Advocacy", "Attention to Detail", "Time Management", "Collaboration", "Problem Solving", "Communication", "User Empathy"]
+    },
+    {
+        job_role: "IT Consultant",
+        required_skills: ["Python", "SQL", "Cloud Platforms", "Networking", "System Design", "Client Management", "Communication", "Problem Solving", "Adaptability", "Business Acumen", "Negotiation", "Presentation Skills", "Analytical Thinking"]
+    },
+    {
+        job_role: "Machine Learning Engineer",
+        required_skills: ["Python", "Scikit-learn", "TensorFlow", "PyTorch", "DSA", "Machine Learning", "Model Deployment", "APIs", "Feature Engineering", "Docker", "Git", "Linux", "Statistics", "Experimental Mindset", "Communication", "Problem Solving", "Collaboration", "Continuous Learning", "Critical Thinking", "Adaptability", "Creativity"]
+    },
+    {
+        job_role: "Metaverse Developer",
+        required_skills: ["Unity", "Unreal", "C#", "C++", "3D Graphics", "Blockchain Basics", "Web3 Integration", "VR SDKs", "Visionary Thinking", "Creativity", "Collaboration", "Adaptability", "Storytelling", "User Empathy", "Communication", "Problem Solving"]
+    },
+    {
+        job_role: "Network Engineer",
+        required_skills: ["Networking", "TCP/IP", "Routing", "Switching", "Python", "Linux", "Network Automation", "Firewalls", "VLAN", "DNS", "DHCP", "Troubleshooting", "Documentation", "Communication", "Reliability", "Collaboration", "Problem Solving", "Adaptability", "Analytical Thinking"]
+    },
+    {
+        job_role: "Network Security Engineer",
+        required_skills: ["Networking", "Python", "Linux", "Firewalls", "IDS/IPS", "VPN", "Cryptography", "Network Monitoring", "SIEM", "Incident Response", "Vigilance", "Communication", "Threat Analysis", "Adaptability", "Collaboration", "Problem Solving", "Attention to Detail", "Ethical Mindset"]
+    },
+    {
+        job_role: "NLP Engineer",
+        required_skills: ["Python", "NLTK", "spaCy", "Transformers", "Tokenization", "Text Preprocessing", "Word Embeddings", "Deep Learning", "PyTorch", "TensorFlow", "APIs", "Git", "Linguistic Curiosity", "Critical Thinking", "Communication", "Collaboration", "Patience", "Analytical Thinking", "Creativity", "Continuous Learning"]
+    },
+    {
+        job_role: "Penetration Tester",
+        required_skills: ["Python", "Bash", "Linux", "Networking", "Metasploit", "Web Security", "SQL Injection", "Exploit Writing", "Vulnerability Scanners", "OSINT", "Creative Thinking", "Integrity", "Reporting", "Persistence", "Communication", "Adaptability", "Attention to Detail", "Collaboration"]
+    },
+    {
+        job_role: "Performance Tester",
+        required_skills: ["JMeter", "LoadRunner", "Performance Testing", "Python", "Java", "Monitoring", "Analytical Thinking", "Attention to Detail", "Patience", "Communication", "Problem Solving", "Collaboration", "Process Orientation", "Documentation"]
+    },
+    {
+        job_role: "Platform Engineer",
+        required_skills: ["Python", "Go", "Linux", "Kubernetes", "Docker", "Cloud Platforms", "Infrastructure as Code", "APIs", "Automation", "Service Orientation", "Strategic Thinking", "Communication", "Collaboration", "Automation Mindset", "Problem Solving", "Adaptability", "Documentation"]
+    },
+    {
+        job_role: "Product Engineer",
+        required_skills: ["Java", "Python", "System Design", "APIs", "Databases", "Cloud", "Business Acumen", "User-Centricity", "Collaboration", "Pragmatism", "Problem Solving", "Communication", "Creativity", "Adaptability"]
     },
     {
         job_role: "Product Manager",
-        required_skills: ["product strategy", "market research", "user research", "analytics", "communication", "leadership", "agile", "roadmap planning", "stakeholder management", "prioritization", "problem solving"],
-        confidence: 83
+        required_skills: ["SQL", "Data Analysis", "APIs Basics", "Agile Tools", "Product Analytics", "Leadership", "Communication", "Strategic Thinking", "Empathy", "Prioritization", "Negotiation", "Storytelling", "Stakeholder Management"]
+    },
+    {
+        job_role: "Project Coordinator",
+        required_skills: ["Excel", "SQL Basics", "Project Management Tools", "Reporting", "Documentation", "Organization", "Communication", "Time Management", "Adaptability", "Collaboration", "Attention to Detail", "Problem Solving", "Stakeholder Management"]
+    },
+    {
+        job_role: "Quality Assurance Engineer",
+        required_skills: ["Manual Testing", "Automation Basics", "Test Case Design", "Bug Tracking", "SQL", "Attention to Detail", "Communication", "Patience", "Critical Thinking", "Collaboration", "Empathy", "Process Orientation", "Problem Solving"]
+    },
+    {
+        job_role: "Research Scientist (AI/ML)",
+        required_skills: ["Python", "R", "Machine Learning", "Deep Learning", "Statistics", "Linear Algebra", "Probability", "Data Analysis", "Research Methods", "Model Evaluation", "Experimentation", "Git", "Curiosity", "Critical Thinking", "Communication", "Persistence", "Collaboration", "Creativity", "Rigor", "Continuous Learning"]
+    },
+    {
+        job_role: "Site Reliability Engineer",
+        required_skills: ["Python", "Go", "Linux", "Kubernetes", "Docker", "Monitoring", "Automation", "Incident Management", "CI/CD", "System Design", "Calm Under Pressure", "Systems Thinking", "Collaboration", "Communication", "Problem Solving", "Adaptability", "Automation Mindset", "Documentation"]
+    },
+    {
+        job_role: "Smart Contract Developer",
+        required_skills: ["Solidity", "Ethereum", "Web3.js", "Hardhat", "Cryptography", "Smart Contract Security", "Testing", "Precision", "Security Awareness", "Logical Thinking", "Communication", "Adaptability", "Attention to Detail", "Collaboration", "Integrity"]
+    },
+    {
+        job_role: "SOC Analyst",
+        required_skills: ["Python", "SIEM", "Log Analysis", "Linux", "Networking", "Incident Response", "Malware Analysis", "Threat Intelligence", "Scripting", "Vigilance", "Communication", "Stress Management", "Teamwork", "Analytical Thinking", "Attention to Detail", "Adaptability", "Documentation"]
+    },
+    {
+        job_role: "Software Developer",
+        required_skills: ["Java", "Python", "C#", "JavaScript", "SQL", "OOP", "Git", "REST APIs", "MVC", "Debugging", "Unit Testing", "Agile", "Linux", "CI/CD", "Version Control", "Logical Reasoning", "Teamwork", "Communication", "Problem Solving", "Adaptability", "Time Management", "Attention to Detail", "Continuous Learning"]
+    },
+    {
+        job_role: "Software Engineer",
+        required_skills: ["C", "C++", "Java", "Python", "DSA", "OOP", "Git", "SQL", "Operating Systems", "Computer Networks", "REST APIs", "Design Patterns", "Debugging", "Unit Testing", "Linux", "Problem Solving", "Collaboration", "Communication", "Adaptability", "Critical Thinking", "Time Management", "Attention to Detail", "Systems Thinking"]
+    },
+    {
+        job_role: "Software Test Engineer",
+        required_skills: ["Manual Testing", "Java", "Python", "Selenium", "Test Case Design", "Bug Tracking", "API Testing", "Attention to Detail", "Critical Thinking", "Communication", "Patience", "Collaboration", "Adaptability", "Process Orientation", "Empathy"]
+    },
+    {
+        job_role: "System Programmer",
+        required_skills: ["C", "C++", "Assembly", "Linux Kernel", "Memory Management", "Multithreading", "Process Management", "File Systems", "OS Internals", "GDB", "Shell Scripting", "Computer Architecture", "Networking", "Low-level APIs", "Precision", "Logical Thinking", "Patience", "Collaboration", "Problem Solving", "Documentation", "Attention to Detail", "Systems Thinking"]
+    },
+    {
+        job_role: "Systems Analyst",
+        required_skills: ["SQL", "System Design", "APIs", "Documentation", "Data Analysis", "Requirement Analysis", "Communication", "Critical Thinking", "Problem Solving", "Collaboration", "Stakeholder Management", "Adaptability"]
+    },
+    {
+        job_role: "Technical Consultant",
+        required_skills: ["Python", "SQL", "APIs", "Cloud Platforms", "System Design", "Client Management", "Communication", "Problem Solving", "Adaptability", "Presentation Skills", "Business Acumen", "Collaboration", "Analytical Thinking"]
+    },
+    {
+        job_role: "Technical Product Manager",
+        required_skills: ["SQL", "APIs", "System Design", "Data Analysis", "Agile", "Technical Acumen", "Communication", "Strategic Thinking", "Prioritization", "Empathy", "Leadership", "Negotiation", "Stakeholder Management"]
+    },
+    {
+        job_role: "Technical Support Engineer",
+        required_skills: ["Linux", "Windows", "Networking Basics", "Python", "SQL", "Troubleshooting", "Patience", "Communication", "Empathy", "Problem Solving", "Adaptability", "Active Listening", "Documentation", "Time Management"]
+    },
+    {
+        job_role: "UI Designer",
+        required_skills: ["HTML", "CSS", "Figma", "Adobe XD", "Responsive Design", "Visual Communication", "Empathy", "Creativity", "Collaboration", "Openness to Feedback", "Attention to Detail", "Problem Solving", "Advocacy"]
+    },
+    {
+        job_role: "UI/UX Engineer",
+        required_skills: ["HTML", "CSS", "JavaScript", "React", "Figma", "Accessibility", "Bridge-Building", "Empathy", "Technical Communication", "Collaboration", "Creativity", "Problem Solving", "Attention to Detail", "Adaptability"]
     },
     {
         job_role: "UX Designer",
-        required_skills: ["ui/ux", "user research", "wireframing", "prototyping", "figma", "adobe xd", "sketch", "usability testing", "interaction design", "information architecture", "visual design", "communication"],
-        confidence: 88
+        required_skills: ["Wireframing", "Prototyping", "User Research", "Figma", "Usability Testing", "User Empathy", "Research", "Communication", "Collaboration", "Critical Thinking", "Storytelling", "Openness to Feedback", "Problem Solving"]
     },
     {
-        job_role: "Technical Writer",
-        required_skills: ["technical writing", "documentation", "communication", "writing", "editing", "api documentation", "markdown", "git", "research", "attention to detail", "organization", "time management"],
-        confidence: 82
+        job_role: "Web Developer",
+        required_skills: ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "WordPress", "REST APIs", "Git", "Responsive Design", "Hosting", "SEO", "Debugging", "Web Security", "CMS", "Deployment", "Adaptability", "Problem Solving", "Communication", "Time Management", "Collaboration", "Attention to Detail", "Creativity", "Continuous Learning"]
+    },
+    {
+        job_role: "Web3 Developer",
+        required_skills: ["JavaScript", "Solidity", "Web3.js", "React", "Ethereum", "Wallet Integration", "APIs", "Decentralization Mindset", "Adaptability", "Communication", "Collaboration", "Security Awareness", "Critical Thinking", "Continuous Learning", "Transparency"]
+    },
+    {
+        job_role: "Career Counselor",
+        required_skills: ["Time Management", "Analytical Thinking", "Oracle", "Firebase", "Public Speaking", "Go", "Power BI", "Git", "Critical Thinking", "Bash", "Statistics", "Leadership", "Research Skills", "Redis", "Excel", "Google Cloud", "Negotiation", "GraphQL", "HTML", "Cassandra", "Communication"]
+    },
+    {
+        job_role: "Content Writer",
+        required_skills: ["Terraform", "Firewall Management", "Negotiation", "Research Skills", "Analysis", "Leadership", "Communication", "Azure", "Problem Solving", "Git", "Strategic Thinking", "Penetration Testing", "Power BI", "Collaboration"]
+    },
+    {
+        job_role: "Event Manager",
+        required_skills: ["Strategic Thinking", "Collaboration", "Decision Making", "Creativity", "Penetration Testing", "Time Management", "Firebase", "Empathy", "Communication", "Problem Solving"]
+    },
+    {
+        job_role: "HR Recruiter",
+        required_skills: ["Attention to Detail", "Collaboration", "Creativity", "Time Management", "Presentation Skills", "Research Skills", "Computer Vision", "Conflict Resolution", "Analytical Thinking", "Penetration Testing"]
+    },
+    {
+        job_role: "Sales Executive",
+        required_skills: ["Communication", "Teamwork", "Negotiation", "Power BI", "Excel", "Analytical Thinking", "Conflict Resolution", "Time Management", "Public Speaking"]
     }
 ];
 
-// Skill Tags Data
-const popularSkills = [
-    'python', 'java', 'javascript', 'html', 'css', 'sql', 'mongodb',
-    'react', 'node.js', 'machine learning', 'deep learning', 'tensorflow',
-    'pytorch', 'data analysis', 'statistics', 'excel', 'tableau', 'power bi',
-    'git', 'docker', 'kubernetes', 'aws', 'azure', 'linux', 'networking',
-    'security', 'android', 'ios', 'flutter', 'communication', 'teamwork',
-    'problem solving', 'critical thinking', 'agile', 'scrum', 'jira',
-    'c++', 'c#', 'php', 'ruby', 'swift', 'kotlin', 'rust', 'go',
-    'data structures', 'algorithms', 'oop', 'rest apis', 'graphql',
-    'firebase', 'mysql', 'postgresql', 'redis', 'elasticsearch',
-    'nginx', 'apache', 'jenkins', 'terraform', 'ansible', 'prometheus',
-    'grafana', 'splunk', 'hadoop', 'spark', 'kafka', 'airflow'
-];
-
-// Initialize on Page Load
-document.addEventListener('DOMContentLoaded', () => {
-    initializeSkillTags();
-    initializeEventListeners();
-    updateStats();
-    
-    // Initialize AOS
-    if (typeof AOS !== 'undefined') {
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 100
-        });
-    }
-    
-    // Initialize Typed.js
-    if (typeof Typed !== 'undefined') {
-        new Typed('.typing', {
-            strings: ['Career Path', 'Job Role', 'Future', 'Dream Job'],
-            typeSpeed: 100,
-            backSpeed: 60,
-            loop: true
-        });
-    }
-    
-    // Initialize Particles
-    if (typeof particlesJS !== 'undefined' && document.getElementById('particles-js')) {
-        particlesJS.load('particles-js', 'particles.json', function() {
-            console.log('Particles loaded');
-        });
-    }
+// Add confidence scores (adjust as needed)
+jobDatabase.forEach(job => {
+    job.confidence = Math.min(99, 70 + Math.floor(Math.random() * 25));
 });
 
-// Initialize Skill Tags
-function initializeSkillTags() {
-    const tagsContainer = document.getElementById('skillTags');
-    if (!tagsContainer) return;
+// Popular skills for quick-add tags
+const popularSkills = [
+    'python', 'java', 'javascript', 'html', 'css', 'sql', 'mongodb', 'react',
+    'node.js', 'machine learning', 'deep learning', 'tensorflow', 'pytorch',
+    'data analysis', 'excel', 'git', 'docker', 'kubernetes', 'aws', 'azure',
+    'linux', 'networking', 'security', 'android', 'ios', 'flutter', 'communication',
+    'teamwork', 'problem solving', 'critical thinking', 'agile', 'c', 'c++', 'c#',
+    'php', 'ruby', 'swift', 'kotlin', 'rust', 'go', 'data structures', 'algorithms'
+];
 
-    const displaySkills = popularSkills.slice(0, 20);
-    
-    tagsContainer.innerHTML = displaySkills.map(skill => 
-        `<span class="skill-tag" onclick="addSkill('${skill}')">
-            <i class="fas fa-plus"></i> ${skill}
-        </span>`
-    ).join('');
-}
+// ==================== UTILITY FUNCTIONS ====================
 
-// Initialize Event Listeners
-function initializeEventListeners() {
-    const skillsInput = document.getElementById('skillsInput');
-    if (skillsInput) {
-        skillsInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                analyzeSkills();
-            }
-        });
-    }
-
-    window.addEventListener('scroll', handleScroll);
-
-    const backToTop = document.getElementById('backToTop');
-    if (backToTop) {
-        backToTop.addEventListener('click', scrollToTop);
-    }
-
-    const navToggle = document.getElementById('navToggle');
-    if (navToggle) {
-        navToggle.addEventListener('click', toggleMobileNav);
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', smoothScroll);
-    });
-
-    // Form submissions
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', handleContactSubmit);
-    }
-
-    const newsletterForm = document.querySelector('.newsletter-form');
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', handleNewsletterSubmit);
-    }
-}
-
-// Handle Scroll
-function handleScroll() {
-    const navbar = document.querySelector('.navbar');
-    const backToTop = document.getElementById('backToTop');
-    
-    if (window.scrollY > 50) {
-        navbar?.classList.add('scrolled');
-    } else {
-        navbar?.classList.remove('scrolled');
-    }
-    
-    if (window.scrollY > 300) {
-        backToTop?.classList.add('show');
-    } else {
-        backToTop?.classList.remove('show');
-    }
-
-    updateActiveNavLink();
-}
-
-// Update Active Navigation Link
-function updateActiveNavLink() {
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-links a');
-    
-    let current = '';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100;
-        const sectionHeight = section.clientHeight;
-        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
-}
-
-// Toggle Mobile Navigation
-function toggleMobileNav() {
-    const navLinks = document.querySelector('.nav-links');
-    const navToggle = document.getElementById('navToggle');
-    
-    navLinks?.classList.toggle('show');
-    navToggle?.classList.toggle('active');
-}
-
-// Smooth Scroll
-function smoothScroll(e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-        target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-        
-        document.querySelector('.nav-links')?.classList.remove('show');
-        document.getElementById('navToggle')?.classList.remove('active');
-    }
-}
-
-// Scroll to Top
-function scrollToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-}
-
-// Update Stats
-function updateStats() {
-    const totalJobs = document.getElementById('totalJobs');
-    const totalSkills = document.getElementById('totalSkills');
-    
-    if (totalJobs) totalJobs.textContent = jobDatabase.length + '+';
-    if (totalSkills) totalSkills.textContent = popularSkills.length + '+';
-}
-
-// Add Skill from Tag
-function addSkill(skill) {
-    const input = document.getElementById('skillsInput');
-    if (!input) return;
-
-    const currentSkills = input.value.trim();
-    const skills = currentSkills ? currentSkills.split(',').map(s => s.trim().toLowerCase()) : [];
-    
-    if (!skills.includes(skill.toLowerCase())) {
-        skills.push(skill);
-        input.value = skills.join(', ');
-    }
-    
-    input.focus();
-    showNotification(`Added: ${skill}`, 'success');
-}
-
-// Calculate Match Percentage - FIXED: Prevents "r" from matching with "learning"
 function calculateMatch(userSkills, requiredSkills) {
     if (!userSkills.length || !requiredSkills.length) return 0;
-    
     const userSet = new Set(userSkills.map(s => s.toLowerCase().trim()));
     let matchCount = 0;
-    
     requiredSkills.forEach(reqSkill => {
-        const reqSkillLower = reqSkill.toLowerCase().trim();
-        
-        // Check for exact matches first
+        const reqLower = reqSkill.toLowerCase().trim();
         for (const userSkill of userSet) {
-            // Exact match
-            if (userSkill === reqSkillLower) {
+            if (userSkill === reqLower) {
                 matchCount++;
                 break;
             }
-            
-            // Handle multi-word skills (e.g., "machine learning")
-            if (reqSkillLower.includes(' ') && userSkill.includes(' ')) {
-                if (userSkill === reqSkillLower) {
-                    matchCount++;
-                    break;
-                }
+            if (reqLower.includes(' ') && userSkill.includes(' ') && userSkill === reqLower) {
+                matchCount++;
+                break;
             }
-            
-            // Handle cases where user skill is part of required skill
-            // But prevent single letters from matching (like 'r' matching with 'learning')
-            if (reqSkillLower.includes(userSkill) && userSkill.length > 2) {
-                // Only count if it's a significant part (more than 2 chars)
-                // And ensure it's a word boundary match
-                const words = reqSkillLower.split(' ');
+            if (reqLower.includes(userSkill) && userSkill.length > 2) {
+                const words = reqLower.split(' ');
                 if (words.some(word => word === userSkill)) {
                     matchCount++;
                     break;
                 }
             }
-            
-            // Handle cases where required skill is part of user skill
-            if (userSkill.includes(reqSkillLower) && reqSkillLower.length > 2) {
+            if (userSkill.includes(reqLower) && reqLower.length > 2) {
                 const userWords = userSkill.split(' ');
-                if (userWords.some(word => word === reqSkillLower)) {
+                if (userWords.some(word => word === reqLower)) {
                     matchCount++;
                     break;
                 }
             }
         }
     });
-    
     return Math.round((matchCount / requiredSkills.length) * 100);
 }
 
-// Analyze Skills
+// Helper to format skill name for display (C -> C-programming, R -> R-programming)
+function formatSkillName(skill) {
+    if (skill.toLowerCase() === 'c') return 'C-programming';
+    if (skill.toLowerCase() === 'r') return 'R-programming';
+    return skill;
+}
+
+// ==================== MAIN ANALYSIS FUNCTION ====================
+
 async function analyzeSkills() {
     const skillsInput = document.getElementById('skillsInput');
     const skills = skillsInput?.value.trim();
@@ -390,39 +348,36 @@ async function analyzeSkills() {
     toggleSections(true);
 
     try {
-        // Parse user skills - clean and filter
-        const userSkills = skills.split(',')
+        // Parse user skills – split on commas OR semicolons, clean, and filter
+        const userSkills = skills.split(/[;,]/)
             .map(s => s.trim().toLowerCase())
-            .filter(s => s.length > 1); // Filter out single characters like 'r'
-        
+            .filter(s => {
+                if (s.length === 1) {
+                    // Keep only 'c' and 'r' as valid single-letter skills
+                    return s === 'c' || s === 'r';
+                }
+                return s.length > 1;
+            });
+
         const recommendations = jobDatabase.map(job => {
             const matchPercentage = calculateMatch(userSkills, job.required_skills);
-            
             const matchingSkills = job.required_skills.filter(reqSkill => {
                 const reqLower = reqSkill.toLowerCase();
                 return userSkills.some(userSkill => {
-                    // Exact match
                     if (userSkill === reqLower) return true;
-                    
-                    // Multi-word match
-                    if (reqLower.includes(' ') && userSkill.includes(' ')) {
-                        return userSkill === reqLower;
-                    }
-                    
-                    // Word boundary match (prevent 'r' matching with 'learning')
+                    if (reqLower.includes(' ') && userSkill.includes(' ') && userSkill === reqLower) return true;
                     if (reqLower.includes(userSkill) && userSkill.length > 2) {
                         const words = reqLower.split(' ');
                         return words.some(word => word === userSkill);
                     }
-                    
+                    if (userSkill.includes(reqLower) && reqLower.length > 2) {
+                        const userWords = userSkill.split(' ');
+                        return userWords.some(word => word === reqLower);
+                    }
                     return false;
                 });
             });
-            
-            const skillsToLearn = job.required_skills.filter(reqSkill => 
-                !matchingSkills.includes(reqSkill)
-            );
-            
+            const skillsToLearn = job.required_skills.filter(s => !matchingSkills.includes(s));
             return {
                 job_role: job.job_role,
                 confidence: job.confidence,
@@ -433,14 +388,14 @@ async function analyzeSkills() {
                 total_matching: matchingSkills.length
             };
         });
-        
-        const sortedRecs = recommendations
-            .filter(rec => rec.match_percentage > 10)
-            .sort((a, b) => b.match_percentage - a.match_percentage);
-        
-        const limit = topN === '0' ? sortedRecs.length : Math.min(parseInt(topN), sortedRecs.length);
-        currentRecommendations = sortedRecs.slice(0, limit);
-        
+
+        // --- FIX: Show all jobs that have at least one matching skill (match_percentage > 0) ---
+        let filteredRecs = recommendations.filter(rec => rec.match_percentage > 0);
+        filteredRecs.sort((a, b) => b.match_percentage - a.match_percentage);
+
+        const limit = topN === '0' ? filteredRecs.length : Math.min(parseInt(topN), filteredRecs.length);
+        currentRecommendations = filteredRecs.slice(0, limit);
+
         if (currentRecommendations.length > 0) {
             displayResults(currentRecommendations, skills);
             showNotification(`Found ${currentRecommendations.length} career matches!`, 'success');
@@ -448,7 +403,6 @@ async function analyzeSkills() {
             showNotification('No matches found. Try different skills.', 'warning');
             toggleSections(false);
         }
-        
     } catch (error) {
         console.error('Analysis failed:', error);
         showNotification('Error analyzing skills', 'error');
@@ -456,17 +410,16 @@ async function analyzeSkills() {
     }
 }
 
-// Toggle Sections
+// ==================== UI FUNCTIONS ====================
+
 function toggleSections(loading) {
     const inputSection = document.querySelector('.input-section');
     const loadingSection = document.getElementById('loading');
     const resultsSection = document.getElementById('results');
-    
     if (loading) {
         if (inputSection) inputSection.style.display = 'none';
         if (loadingSection) loadingSection.style.display = 'flex';
         if (resultsSection) resultsSection.style.display = 'none';
-        
         animateLoadingText();
     } else {
         if (inputSection) inputSection.style.display = 'block';
@@ -475,7 +428,6 @@ function toggleSections(loading) {
     }
 }
 
-// Animate Loading Text
 function animateLoadingText() {
     const phrases = [
         'Analyzing your skills...',
@@ -484,11 +436,9 @@ function animateLoadingText() {
         'Pixel2Predict AI at work...',
         'Almost there...'
     ];
-    
     let index = 0;
     const loadingElement = document.querySelector('.typing-loading');
     if (!loadingElement) return;
-    
     const interval = setInterval(() => {
         if (index < phrases.length) {
             loadingElement.textContent = phrases[index];
@@ -499,28 +449,19 @@ function animateLoadingText() {
     }, 800);
 }
 
-// Display Results
 function displayResults(recommendations, inputSkills) {
     toggleSections(false);
-    
     currentPage = 1;
     totalPages = Math.ceil(recommendations.length / itemsPerPage);
-    
     updateResultsSummary(recommendations, inputSkills);
     addResultsControls();
     displayPaginatedRecommendations();
-    
-    document.getElementById('results')?.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-    });
+    document.getElementById('results')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// Update Results Summary
 function updateResultsSummary(recommendations, inputSkills) {
     const summary = document.getElementById('resultsSummary');
     if (!summary) return;
-    
     summary.innerHTML = `
         <div class="summary-content" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
             <div>
@@ -537,11 +478,9 @@ function updateResultsSummary(recommendations, inputSkills) {
     `;
 }
 
-// Add Results Controls
 function addResultsControls() {
     const controls = document.getElementById('resultsControls');
     if (!controls) return;
-    
     controls.innerHTML = `
         <div class="view-toggle">
             <button class="view-btn ${viewMode === 'grid' ? 'active' : ''}" onclick="setViewMode('grid')">
@@ -551,7 +490,6 @@ function addResultsControls() {
                 <i class="fas fa-list"></i> List
             </button>
         </div>
-        
         <div class="items-per-page">
             <select class="glass-select" onchange="changeItemsPerPage(this.value)">
                 <option value="5" ${itemsPerPage === 5 ? 'selected' : ''}>5 per page</option>
@@ -563,25 +501,21 @@ function addResultsControls() {
     `;
 }
 
-// Set View Mode
 function setViewMode(mode) {
     viewMode = mode;
     const grid = document.getElementById('recommendationsGrid');
     if (grid) {
         grid.className = `recommendations-grid ${viewMode}-view`;
     }
-    
     document.querySelectorAll('.view-btn').forEach(btn => {
         btn.classList.remove('active');
         if (btn.textContent.toLowerCase().includes(mode)) {
             btn.classList.add('active');
         }
     });
-    
     displayPaginatedRecommendations();
 }
 
-// Change Items Per Page
 function changeItemsPerPage(value) {
     itemsPerPage = parseInt(value);
     currentPage = 1;
@@ -590,48 +524,38 @@ function changeItemsPerPage(value) {
     updateResultsSummary(currentRecommendations, document.getElementById('skillsInput')?.value || '');
 }
 
-// Display Paginated Recommendations
 function displayPaginatedRecommendations() {
     const grid = document.getElementById('recommendationsGrid');
     if (!grid) return;
-    
     grid.innerHTML = '';
     grid.className = `recommendations-grid ${viewMode}-view`;
-    
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = Math.min(startIndex + itemsPerPage, currentRecommendations.length);
     const paginatedRecs = currentRecommendations.slice(startIndex, endIndex);
-    
     paginatedRecs.forEach((rec, idx) => {
         const globalIndex = startIndex + idx;
         const card = createRecommendationCard(rec, globalIndex);
         grid.appendChild(card);
     });
-    
     addPaginationControls();
 }
 
-// Create Recommendation Card with Expandable Skills
 function createRecommendationCard(rec, index) {
     const card = document.createElement('div');
     card.className = 'recommendation-card';
     card.setAttribute('data-aos', 'fade-up');
     card.setAttribute('data-aos-delay', (index * 50).toString());
     card.id = `rec-card-${index}`;
-    
     let badgeColor = '#10b981';
     if (rec.match_percentage < 30) badgeColor = '#ef4444';
     else if (rec.match_percentage < 50) badgeColor = '#f59e0b';
     else if (rec.match_percentage < 70) badgeColor = '#f97316';
-    
     const initialMatching = rec.matching_skills.slice(0, 5);
     const hiddenMatching = rec.matching_skills.slice(5);
     const hasMoreMatching = hiddenMatching.length > 0;
-    
     const initialMissing = rec.skills_to_learn.slice(0, 5);
     const hiddenMissing = rec.skills_to_learn.slice(5);
     const hasMoreMissing = hiddenMissing.length > 0;
-    
     card.innerHTML = `
         <div class="card-header">
             <h3>
@@ -642,11 +566,9 @@ function createRecommendationCard(rec, index) {
                 ${rec.match_percentage}% Match
             </span>
         </div>
-        
         <div class="confidence-bar">
             <div class="confidence-fill" style="width: ${rec.confidence}%"></div>
         </div>
-        
         <div class="skills-section">
             <h4>
                 <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
@@ -655,15 +577,14 @@ function createRecommendationCard(rec, index) {
             <div class="skills-list" id="matching-skills-${index}">
                 ${initialMatching.map(skill => 
                     `<span class="skill-badge matching">
-                        <i class="fas fa-check"></i> ${skill}
+                        <i class="fas fa-check"></i> ${formatSkillName(skill)}
                     </span>`
                 ).join('')}
-                
                 ${hasMoreMatching ? `
                     <span class="hidden-skills" id="hidden-matching-${index}" style="display: none;">
                         ${hiddenMatching.map(skill => 
                             `<span class="skill-badge matching">
-                                <i class="fas fa-check"></i> ${skill}
+                                <i class="fas fa-check"></i> ${formatSkillName(skill)}
                             </span>`
                         ).join('')}
                     </span>
@@ -671,12 +592,10 @@ function createRecommendationCard(rec, index) {
                         +${hiddenMatching.length} more
                     </button>
                 ` : ''}
-                
                 ${rec.matching_skills.length === 0 ? 
                     '<p style="color: var(--text-secondary);">No direct matches</p>' : ''}
             </div>
         </div>
-        
         <div class="skills-section">
             <h4>
                 <i class="fas fa-graduation-cap" style="color: var(--warning-color);"></i>
@@ -685,15 +604,14 @@ function createRecommendationCard(rec, index) {
             <div class="skills-list" id="missing-skills-${index}">
                 ${initialMissing.map(skill => 
                     `<span class="skill-badge missing">
-                        <i class="fas fa-plus"></i> ${skill}
+                        <i class="fas fa-plus"></i> ${formatSkillName(skill)}
                     </span>`
                 ).join('')}
-                
                 ${hasMoreMissing ? `
                     <span class="hidden-skills" id="hidden-missing-${index}" style="display: none;">
                         ${hiddenMissing.map(skill => 
                             `<span class="skill-badge missing">
-                                <i class="fas fa-plus"></i> ${skill}
+                                <i class="fas fa-plus"></i> ${formatSkillName(skill)}
                             </span>`
                         ).join('')}
                     </span>
@@ -703,7 +621,6 @@ function createRecommendationCard(rec, index) {
                 ` : ''}
             </div>
         </div>
-        
         <div class="card-footer">
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <span class="tooltip" data-tooltip="AI Model Confidence">
@@ -721,17 +638,13 @@ function createRecommendationCard(rec, index) {
             </div>
         </div>
     `;
-    
     return card;
 }
 
-// Toggle Skills Visibility
 function toggleSkills(index, type) {
     const hiddenDiv = document.getElementById(`hidden-${type}-${index}`);
     const moreBtn = document.getElementById(`${type}-more-${index}`);
-    
     if (!hiddenDiv || !moreBtn) return;
-    
     if (hiddenDiv.style.display === 'none') {
         hiddenDiv.style.display = 'inline';
         moreBtn.textContent = 'Show less';
@@ -746,76 +659,54 @@ function toggleSkills(index, type) {
     }
 }
 
-// Add Pagination Controls
 function addPaginationControls() {
     const existingControls = document.querySelector('.pagination-controls');
-    if (existingControls) {
-        existingControls.remove();
-    }
-    
+    if (existingControls) existingControls.remove();
     if (totalPages <= 1) return;
-    
     const grid = document.getElementById('recommendationsGrid');
     const controls = document.createElement('div');
     controls.className = 'pagination-controls';
-    
     controls.innerHTML = `
         <button class="pagination-btn" onclick="changePage('prev')" ${currentPage === 1 ? 'disabled' : ''}>
             <i class="fas fa-chevron-left"></i> Previous
         </button>
-        
-        <div class="page-info">
-            Page ${currentPage} of ${totalPages}
-        </div>
-        
+        <div class="page-info">Page ${currentPage} of ${totalPages}</div>
         <button class="pagination-btn" onclick="changePage('next')" ${currentPage === totalPages ? 'disabled' : ''}>
             Next <i class="fas fa-chevron-right"></i>
         </button>
     `;
-    
     grid.insertAdjacentElement('afterend', controls);
 }
 
-// Change Page
 function changePage(direction) {
     if (direction === 'prev' && currentPage > 1) {
         currentPage--;
     } else if (direction === 'next' && currentPage < totalPages) {
         currentPage++;
     }
-    
     displayPaginatedRecommendations();
     updateResultsSummary(currentRecommendations, document.getElementById('skillsInput')?.value || '');
-    
     document.getElementById('results')?.scrollIntoView({ behavior: 'smooth' });
 }
 
-// View Job Details
 function viewJobDetails(jobRole) {
     const job = currentRecommendations.find(r => r.job_role === jobRole);
-    if (job) {
-        showJobDetailsModal(job);
-    }
+    if (job) showJobDetailsModal(job);
 }
 
-// Show Job Details Modal
 function showJobDetailsModal(job) {
     const existingModal = document.querySelector('.modal');
     if (existingModal) existingModal.remove();
-    
     const modal = document.createElement('div');
     modal.className = 'modal';
-    
     modal.innerHTML = `
         <div class="modal-content">
             <button class="modal-close" onclick="this.closest('.modal').remove()">
                 <i class="fas fa-times"></i>
             </button>
-            
             <h2 style="margin-bottom: 20px; color: var(--accent-blue);">
                 <i class="fas fa-briefcase"></i> ${job.job_role}
             </h2>
-            
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
                 <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; text-align: center;">
                     <div style="font-size: 2.5rem; font-weight: bold; color: var(--success-color);">
@@ -830,7 +721,6 @@ function showJobDetailsModal(job) {
                     <div style="color: var(--text-secondary);">AI Confidence</div>
                 </div>
             </div>
-            
             <div style="margin-bottom: 25px;">
                 <h3 style="margin-bottom: 15px; color: var(--success-color);">
                     <i class="fas fa-check-circle"></i> Your Matching Skills (${job.matching_skills.length})
@@ -838,12 +728,11 @@ function showJobDetailsModal(job) {
                 <div style="display: flex; flex-wrap: wrap; gap: 10px; max-height: 200px; overflow-y: auto; padding: 10px;">
                     ${job.matching_skills.map(skill => 
                         `<span style="background: rgba(16,185,129,0.1); color: var(--success-color); padding: 8px 15px; border-radius: 30px; font-size: 0.95rem;">
-                            <i class="fas fa-check"></i> ${skill}
+                            <i class="fas fa-check"></i> ${formatSkillName(skill)}
                         </span>`
                     ).join('')}
                 </div>
             </div>
-            
             <div style="margin-bottom: 25px;">
                 <h3 style="margin-bottom: 15px; color: var(--warning-color);">
                     <i class="fas fa-graduation-cap"></i> Skills to Develop (${job.skills_to_learn.length})
@@ -851,54 +740,37 @@ function showJobDetailsModal(job) {
                 <div style="display: flex; flex-wrap: wrap; gap: 10px; max-height: 200px; overflow-y: auto; padding: 10px;">
                     ${job.skills_to_learn.map(skill => 
                         `<span style="background: rgba(245,158,11,0.1); color: var(--warning-color); padding: 8px 15px; border-radius: 30px; font-size: 0.95rem;">
-                            <i class="fas fa-plus"></i> ${skill}
+                            <i class="fas fa-plus"></i> ${formatSkillName(skill)}
                         </span>`
                     ).join('')}
                 </div>
             </div>
-            
             <div style="background: rgba(255,255,255,0.03); padding: 20px; border-radius: 15px;">
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center;">
-                    <div>
-                        <div style="font-weight: bold; color: var(--text-primary);">Total Skills</div>
-                        <div style="color: var(--accent-blue); font-size: 1.5rem;">${job.total_required_skills}</div>
-                    </div>
-                    <div>
-                        <div style="font-weight: bold; color: var(--text-primary);">Matched</div>
-                        <div style="color: var(--success-color); font-size: 1.5rem;">${job.total_matching}</div>
-                    </div>
-                    <div>
-                        <div style="font-weight: bold; color: var(--text-primary);">Progress</div>
-                        <div style="color: var(--warning-color); font-size: 1.5rem;">${Math.round(job.total_matching/job.total_required_skills*100)}%</div>
-                    </div>
+                    <div><div style="font-weight: bold; color: var(--text-primary);">Total Skills</div><div style="color: var(--accent-blue); font-size: 1.5rem;">${job.total_required_skills}</div></div>
+                    <div><div style="font-weight: bold; color: var(--text-primary);">Matched</div><div style="color: var(--success-color); font-size: 1.5rem;">${job.total_matching}</div></div>
+                    <div><div style="font-weight: bold; color: var(--text-primary);">Progress</div><div style="color: var(--warning-color); font-size: 1.5rem;">${Math.round(job.total_matching/job.total_required_skills*100)}%</div></div>
                 </div>
             </div>
-            
-            <button onclick="this.closest('.modal').remove()" 
-                    style="width: 100%; margin-top: 25px; padding: 15px; background: var(--gradient-1); color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer;">
+            <button onclick="this.closest('.modal').remove()" style="width: 100%; margin-top: 25px; padding: 15px; background: var(--gradient-1); color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer;">
                 Close
             </button>
         </div>
     `;
-    
     document.body.appendChild(modal);
-    
     modal.addEventListener('click', (e) => {
         if (e.target === modal) modal.remove();
     });
 }
 
-// Export Results
 function exportResults(format = 'csv') {
     if (currentRecommendations.length === 0) {
         showNotification('No results to export', 'warning');
         return;
     }
-    
     let content = '';
     let filename = '';
     let type = '';
-    
     switch(format) {
         case 'csv':
             content = 'Job Role,Match %,Confidence %,Matching Skills,Skills to Learn,Match Ratio\n';
@@ -908,7 +780,6 @@ function exportResults(format = 'csv') {
             filename = `Pixel2Predict-Career-${new Date().toISOString().split('T')[0]}.csv`;
             type = 'text/csv';
             break;
-            
         case 'json':
             content = JSON.stringify({
                 generated_by: "Pixel2Predict Career Guidance System",
@@ -921,64 +792,41 @@ function exportResults(format = 'csv') {
             filename = `Pixel2Predict-Career-${new Date().toISOString().split('T')[0]}.json`;
             type = 'application/json';
             break;
-            
         case 'print':
             const printWindow = window.open('', '_blank');
             printWindow.document.write(`
-                <html>
-                <head>
-                    <title>Pixel2Predict - Career Recommendations</title>
-                    <style>
-                        body { font-family: Arial, sans-serif; padding: 20px; max-width: 1200px; margin: 0 auto; }
-                        h1 { color: #2a7de1; text-align: center; }
-                        .header { text-align: center; margin-bottom: 30px; }
-                        .institution { color: #666; font-size: 0.9rem; }
-                        .date { color: #888; margin-bottom: 30px; }
-                        .job { margin: 30px 0; padding: 20px; border: 1px solid #2a7de1; border-radius: 8px; }
-                        .job h2 { color: #2a7de1; margin-top: 0; }
-                        .match { display: inline-block; padding: 5px 15px; border-radius: 20px; font-weight: bold; }
-                        .skills { margin: 15px 0; }
-                        .skill { display: inline-block; margin: 3px; padding: 3px 10px; background: #f0f0f0; border-radius: 15px; font-size: 0.9rem; }
-                        .footer { margin-top: 50px; text-align: center; font-size: 0.8rem; color: #666; }
-                    </style>
-                </head>
+                <html><head><title>Pixel2Predict - Career Recommendations</title><style>
+                    body { font-family: Arial, sans-serif; padding: 20px; max-width: 1200px; margin: 0 auto; }
+                    h1 { color: #2a7de1; text-align: center; }
+                    .header { text-align: center; margin-bottom: 30px; }
+                    .institution { color: #666; font-size: 0.9rem; }
+                    .date { color: #888; margin-bottom: 30px; }
+                    .job { margin: 30px 0; padding: 20px; border: 1px solid #2a7de1; border-radius: 8px; }
+                    .job h2 { color: #2a7de1; margin-top: 0; }
+                    .match { display: inline-block; padding: 5px 15px; border-radius: 20px; font-weight: bold; }
+                    .skills { margin: 15px 0; }
+                    .skill { display: inline-block; margin: 3px; padding: 3px 10px; background: #f0f0f0; border-radius: 15px; font-size: 0.9rem; }
+                    .footer { margin-top: 50px; text-align: center; font-size: 0.8rem; color: #666; }
+                </style></head>
                 <body>
-                    <div class="header">
-                        <h1>Pixel2Predict Career Guidance System</h1>
-                        <div class="institution">CT Institute of Engineering, Management and Technology | NAAC A</div>
-                        <div class="date">Generated on: ${new Date().toLocaleString()}</div>
-                    </div>
+                    <div class="header"><h1>Pixel2Predict Career Guidance System</h1><div class="institution">CT Institute of Engineering, Management and Technology | NAAC A</div><div class="date">Generated on: ${new Date().toLocaleString()}</div></div>
                     ${currentRecommendations.map(rec => `
                         <div class="job">
                             <h2>${rec.job_role}</h2>
-                            <div class="match" style="background: ${rec.match_percentage > 70 ? '#4caf50' : rec.match_percentage > 40 ? '#ff9800' : '#f44336'}; color: white;">
-                                ${rec.match_percentage}% Match
-                            </div>
+                            <div class="match" style="background: ${rec.match_percentage > 70 ? '#4caf50' : rec.match_percentage > 40 ? '#ff9800' : '#f44336'}; color: white;">${rec.match_percentage}% Match</div>
                             <p><strong>AI Confidence:</strong> ${rec.confidence}%</p>
-                            <div class="skills">
-                                <strong>Your Skills:</strong><br>
-                                ${rec.matching_skills.map(s => `<span class="skill">${s}</span>`).join('')}
-                            </div>
-                            <div class="skills">
-                                <strong>Skills to Learn:</strong><br>
-                                ${rec.skills_to_learn.map(s => `<span class="skill">${s}</span>`).join('')}
-                            </div>
+                            <div class="skills"><strong>Your Skills:</strong><br>${rec.matching_skills.map(s => `<span class="skill">${formatSkillName(s)}</span>`).join('')}</div>
+                            <div class="skills"><strong>Skills to Learn:</strong><br>${rec.skills_to_learn.map(s => `<span class="skill">${formatSkillName(s)}</span>`).join('')}</div>
                             <p><strong>Progress:</strong> ${rec.total_matching}/${rec.total_required_skills} skills (${Math.round(rec.total_matching/rec.total_required_skills*100)}%)</p>
                         </div>
                     `).join('')}
-                    <div class="footer">
-                        <p>Developed by Suman Krishna & Shivam Kumar Chaubey</p>
-                        <p>CT Institute of Engineering, Management and Technology | NAAC A Accredited</p>
-                        <p>© 2026 Pixel2Predict. All rights reserved.</p>
-                    </div>
-                </body>
-                </html>
+                    <div class="footer"><p>Developed by Suman Krishna & Shivam Kumar Chaubey | CT Institute of Engineering, Management and Technology | NAAC A Accredited | © 2026 Pixel2Predict</p></div>
+                </body></html>
             `);
             printWindow.document.close();
             printWindow.print();
             return;
     }
-    
     const blob = new Blob([content], { type });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -986,88 +834,52 @@ function exportResults(format = 'csv') {
     a.download = filename;
     a.click();
     window.URL.revokeObjectURL(url);
-    
     showNotification(`Exported ${currentRecommendations.length} recommendations!`, 'success');
 }
 
-// Reset Search
 function resetSearch() {
     const input = document.getElementById('skillsInput');
     if (input) input.value = '';
-    
     document.getElementById('results').style.display = 'none';
     document.querySelector('.input-section').style.display = 'block';
-    
     document.getElementById('resultsControls').innerHTML = '';
     document.querySelector('.pagination-controls')?.remove();
-    
     currentRecommendations = [];
     currentPage = 1;
-    
     document.querySelector('.input-section')?.scrollIntoView({ behavior: 'smooth' });
-    
     showNotification('Ready for new search!', 'info');
 }
 
-// Handle Contact Form Submit
-function handleContactSubmit(event) {
-    event.preventDefault();
-    
-    const form = event.target;
-    const formData = new FormData(form);
-    
-    fetch(form.action, {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'Accept': 'application/json'
-        }
-    })
-    .then(response => {
-        if (response.ok) {
-            showNotification('Message sent successfully!', 'success');
-            form.reset();
-        } else {
-            showNotification('Error sending message. Please try again.', 'error');
-        }
-    })
-    .catch(error => {
-        showNotification('Error sending message. Please try again.', 'error');
-    });
+function initializeSkillTags() {
+    const tagsContainer = document.getElementById('skillTags');
+    if (!tagsContainer) return;
+    const displaySkills = popularSkills.slice(0, 20);
+    tagsContainer.innerHTML = displaySkills.map(skill => {
+        let displayText = skill;
+        if (skill === 'c') displayText = 'c-programming';
+        if (skill === 'r') displayText = 'r-programming';
+        return `<span class="skill-tag" onclick="addSkill('${skill}')">
+            <i class="fas fa-plus"></i> ${displayText}
+        </span>`;
+    }).join('');
 }
 
-// Handle Newsletter Submit
-function handleNewsletterSubmit(event) {
-    event.preventDefault();
-    
-    const form = event.target;
-    const formData = new FormData(form);
-    
-    fetch(form.action, {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'Accept': 'application/json'
-        }
-    })
-    .then(response => {
-        if (response.ok) {
-            showNotification('Subscribed successfully!', 'success');
-            form.reset();
-        } else {
-            showNotification('Error subscribing. Please try again.', 'error');
-        }
-    })
-    .catch(error => {
-        showNotification('Error subscribing. Please try again.', 'error');
-    });
+function addSkill(skill) {
+    const input = document.getElementById('skillsInput');
+    if (!input) return;
+    const currentSkills = input.value.trim();
+    const skills = currentSkills ? currentSkills.split(',').map(s => s.trim().toLowerCase()) : [];
+    if (!skills.includes(skill.toLowerCase())) {
+        skills.push(skill);
+        input.value = skills.join(', ');
+    }
+    input.focus();
+    showNotification(`Added: ${skill === 'c' ? 'c-programming' : skill === 'r' ? 'r-programming' : skill}`, 'success');
 }
 
-// Show Notification
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
-    
     let bgColor;
     switch(type) {
         case 'success': bgColor = 'rgba(16,185,129,0.95)'; break;
@@ -1075,46 +887,42 @@ function showNotification(message, type = 'info') {
         case 'error': bgColor = 'rgba(239,68,68,0.95)'; break;
         default: bgColor = 'rgba(42,125,225,0.95)';
     }
-    
     notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 15px 25px;
-        background: ${bgColor};
-        color: white;
-        border-radius: 12px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        z-index: 10001;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        animation: slideIn 0.3s ease;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255,255,255,0.1);
+        position: fixed; top: 20px; right: 20px; padding: 15px 25px; background: ${bgColor}; color: white;
+        border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 10001;
+        display: flex; align-items: center; gap: 12px; animation: slideIn 0.3s ease;
+        backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);
     `;
-    
     notification.innerHTML = `
-        <i class="fas ${type === 'success' ? 'fa-check-circle' : 
-                       type === 'warning' ? 'fa-exclamation-triangle' : 
-                       type === 'error' ? 'fa-times-circle' : 'fa-info-circle'}"></i>
+        <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'warning' ? 'fa-exclamation-triangle' : type === 'error' ? 'fa-times-circle' : 'fa-info-circle'}"></i>
         <span>${message}</span>
     `;
-    
     document.body.appendChild(notification);
-    
     setTimeout(() => {
         notification.style.animation = 'slideOut 0.3s ease';
         setTimeout(() => {
-            if (notification.parentElement) {
-                notification.remove();
-            }
+            if (notification.parentElement) notification.remove();
         }, 300);
     }, 3000);
 }
 
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+    initializeSkillTags();
+
+    // Add Enter key listener for the skills input
+    const skillsInput = document.getElementById('skillsInput');
+    if (skillsInput) {
+        skillsInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();  // Prevent new line
+                analyzeSkills();
+            }
+        });
+    }
+});
+
 // Export functions to global scope
-window.addSkill = addSkill;
 window.analyzeSkills = analyzeSkills;
 window.resetSearch = resetSearch;
 window.setViewMode = setViewMode;
@@ -1122,5 +930,8 @@ window.changeItemsPerPage = changeItemsPerPage;
 window.changePage = changePage;
 window.viewJobDetails = viewJobDetails;
 window.exportResults = exportResults;
-window.scrollToTop = scrollToTop;
+window.scrollToTop = function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+};
 window.toggleSkills = toggleSkills;
+window.addSkill = addSkill;

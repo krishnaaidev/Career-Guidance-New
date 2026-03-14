@@ -14,16 +14,10 @@ const ApiService = {
         try {
             const response = await fetch(`${API_BASE_URL}/health`, {
                 method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 mode: 'cors'
             });
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             return await response.json();
         } catch (error) {
             console.log('API health check failed, using mock data');
@@ -36,29 +30,15 @@ const ApiService = {
         try {
             const response = await fetch(`${API_BASE_URL}/predict`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    skills: skills,
-                    top_n: topN
-                }),
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ skills, top_n: topN }),
                 mode: 'cors'
             });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             return await response.json();
         } catch (error) {
             console.error('API call failed:', error);
-            // Return mock data structure for offline mode
-            return {
-                success: false,
-                recommendations: [],
-                error: error.message
-            };
+            return { success: false, recommendations: [], error: error.message };
         }
     },
 
@@ -67,12 +47,9 @@ const ApiService = {
         try {
             const response = await fetch(`${API_BASE_URL}/job-roles`, {
                 method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 mode: 'cors'
             });
-            
             return await response.json();
         } catch (error) {
             console.error('Failed to fetch job roles:', error);
@@ -85,12 +62,9 @@ const ApiService = {
         try {
             const response = await fetch(`${API_BASE_URL}/job-details/${encodeURIComponent(jobRole)}`, {
                 method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 mode: 'cors'
             });
-            
             return await response.json();
         } catch (error) {
             console.error('Failed to fetch job details:', error);
@@ -99,5 +73,4 @@ const ApiService = {
     }
 };
 
-// Export for use in main.js
 window.ApiService = ApiService;
